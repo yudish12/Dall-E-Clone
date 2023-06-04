@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  background-color: black;
+}
+
+.logo {
+  background-color: white;
+  margin: 0.5rem;
+  padding: 0rem 1rem;
+}
+
+.Btn {
+  position: relative;
+  border: 2px solid white;
+  padding: 0rem 1rem;
+  font-size: 20px;
+  transition: all 500ms;
+  background-color: black;
+  color: white;
+}
+
+.Btn::after {
+  content: "";
+  position: absolute;
+  top: 55%;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 7px;
+  border-color: transparent transparent transparent #000000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.Btn:hover {
+  color: black;
+  background-color: white;
+}
+
+.Btn:hover::after {
+  opacity: 1;
+}
+
+.hero {
+  height: 91vh;
+  color: #444444;
+}
