@@ -99,7 +99,7 @@ const Myprofile = () => {
           </div>
         </div>
       </div>
-      {postState.posts.length !== 0 && <Showposts />}
+      {postState.posts.length !== 0 && <Showposts arr={postState.posts} />}
     </div>
   );
 };

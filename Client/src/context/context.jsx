@@ -13,6 +13,7 @@ const userDefaultState = {
 const postsDefaultState = {
   posts: [],
   loading: false,
+  searchQuery: "",
   error: null,
 };
 

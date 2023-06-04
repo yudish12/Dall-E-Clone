@@ -5,6 +5,10 @@ export const theme = {
   extend: {
     spacing: {
       40: "10rem",
+      128: "32rem",
+    },
+    width: {
+      128: "32rem",
     },
   },
 };

@@ -1,17 +1,15 @@
-import { useGlobalContext } from "../context/context";
 import { downloadImage } from "../utils";
 import download from "../assets/download.png";
 import { useEffect } from "react";
-const Showposts = () => {
-  const { postState } = useGlobalContext();
-
+const Showposts = ({ arr }) => {
+  console.log(arr);
   useEffect(() => {
-    postState.posts.reverse();
-  }, [postState.posts]);
+    arr.reverse();
+  }, [arr]);
 
   return (
     <div className="grid grid-cols-3">
-      {postState.posts.map((e) => {
+      {arr.map((e) => {
         const { prompt, photo, _id } = e;
         return (
           <>
