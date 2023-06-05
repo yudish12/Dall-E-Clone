@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Dropdown = () => {
   const { user } = useAuth0();
   const [showDrop, setShowDrop] = useState(false);
+
   return (
     <div className="ml-10 flex flex-col relative  justify-evenly items-center ">
       <img
@@ -16,7 +17,9 @@ const Dropdown = () => {
           <Link to={"/myprofile"} className="my-2 mx-auto">
             My Profile
           </Link>
-          <Link className="my-2 mx-auto">Create Post</Link>
+          <Link to="/generateImage" className="my-2 mx-auto">
+            Create Post
+          </Link>
           <Link className="my-2 mx-auto">Logout</Link>
         </div>
       )}

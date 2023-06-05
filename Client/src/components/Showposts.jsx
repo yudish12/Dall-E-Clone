@@ -1,12 +1,7 @@
 import { downloadImage } from "../utils";
 import download from "../assets/download.png";
-import { useEffect } from "react";
-const Showposts = ({ arr }) => {
-  console.log(arr);
-  useEffect(() => {
-    arr.reverse();
-  }, [arr]);
 
+const Showposts = ({ arr }) => {
   return (
     <div className="grid grid-cols-3">
       {arr.map((e) => {

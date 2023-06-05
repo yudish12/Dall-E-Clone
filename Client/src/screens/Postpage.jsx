@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useGlobalContext } from "../context/context";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
@@ -6,28 +6,31 @@ import Showposts from "../components/Showposts";
 
 const Postpage = () => {
   const { postState, postDispatch } = useGlobalContext();
-  const [arr, setArr] = useState(postState.posts);
+  const [arr, setArr] = useState([]);
+
+  const fetchPosts = useCallback(async () => {
+    try {
+      const resp = await axios.get("http://localhost:5000/api/posts");
+      postDispatch({ type: "FETCH_POSTS_SUCCESS", payload: resp.data.posts });
+      console.log(resp.data.posts);
+      resp.data.posts.reverse();
+      setArr(resp.data.posts);
+    } catch (error) {
+      postDispatch({ type: "FETCH_POSTS_ERROR" });
+    }
+  }, [postDispatch]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const resp = await axios.get("http://localhost:5000/api/posts");
-        resp.data.posts.reverse();
-        postDispatch({ type: "FETCH_POSTS_SUCCESS", payload: resp.data.posts });
-      } catch (error) {
-        postDispatch({ type: "FETCH_POSTS_ERROR" });
-      }
-    };
+    console.log("x");
     postDispatch({ type: "FETCH_POSTS_REQ" });
     fetchPosts();
-  }, [postDispatch]);
+  }, [fetchPosts, postDispatch]);
 
   const handleChange = (e) => {
     postDispatch({ type: "SEARCH_POSTS_REQ", payload: e.target.value });
-    console.log(postState);
+
     setArr(postState.posts.filter((el) => el.prompt.includes(e.target.value)));
     postDispatch({ type: "SEARCH_POSTS_SUCCESS" });
-    console.log(postState);
   };
 
   return (

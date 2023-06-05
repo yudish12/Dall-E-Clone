@@ -1,5 +1,5 @@
 export const globalErrorHandler = (err, req, res, next) => {
-  console.log(err);
+  console.log(err.response.error);
   err.statusCode = err.statusCode || 500; //checking weather statuscode is there if not assign 500
   err.status = err.status || "error"; //if status not there just assign error
 
