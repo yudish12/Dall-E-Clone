@@ -28,7 +28,7 @@ export const createUsers = catchAsync(async (req, res, next) => {
 export const authUser = catchAsync(async (req, res, next) => {
   const { username, email, picture } = req.body;
 
-  if(!picture){
+  if (!picture) {
     const photoUrl = await cloudinary.uploader.upload(pic);
   }
 
@@ -50,4 +50,28 @@ export const authUser = catchAsync(async (req, res, next) => {
       user,
     });
   }
+});
+export const editPosts = catchAsync(async (req, res, next) => {
+  const { username } = req.params;
+  const { newUsername, picture } = req.body;
+  if (picture) {
+    const user = await User.findOneAndUpdate(
+      { username: username },
+      { username: newUsername, picture: picture },
+      { new: true }
+    );
+    return res.status(200).json({
+      status: "success",
+      user,
+    });
+  }
+  const user = await User.findOneAndUpdate(
+    { username: username },
+    { username: newUsername },
+    { new: true }
+  );
+  return res.status(200).json({
+    status: "success",
+    user,
+  });
 });

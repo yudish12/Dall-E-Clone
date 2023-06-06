@@ -1,7 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { useGlobalContext } from "../context/context";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const Dropdown = () => {
+  const { userDispatch } = useGlobalContext();
+  const { logout } = useAuth0();
   const { user } = useAuth0();
   const [showDrop, setShowDrop] = useState(false);
 
@@ -20,7 +23,20 @@ const Dropdown = () => {
           <Link to="/generateImage" className="my-2 mx-auto">
             Create Post
           </Link>
-          <Link className="my-2 mx-auto">Logout</Link>
+          <Link
+            onClick={() => {
+              userDispatch({ type: "LOGOUT" });
+              localStorage.clear();
+              logout({
+                logoutParams: {
+                  returnTo: `${window.location.origin}`,
+                },
+              });
+            }}
+            className="my-2 mx-auto"
+          >
+            Logout
+          </Link>
         </div>
       )}
     </div>
