@@ -86,10 +86,10 @@ const Myprofile = () => {
               {user.nickname}
             </h1>
             <Link
-              to={"edit"}
-              className="bg-black py-2 px-4 rounded-md text-white font-bold text-xl"
+              to={"/generateImage"}
+              className="bg-black flex justify-center items-center px-2 rounded-md text-white font-bold text-md"
             >
-              Edit Profile
+              Try Dall-E
             </Link>
           </div>
           <div>
@@ -99,7 +99,9 @@ const Myprofile = () => {
           </div>
         </div>
       </div>
-      {postState.posts.length !== 0 && <Showposts arr={postState.posts} />}
+      {postState.posts.length !== 0 && (
+        <Showposts arr={postState.posts.reverse()} />
+      )}
     </div>
   );
 };
